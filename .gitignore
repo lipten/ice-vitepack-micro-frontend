@@ -13,6 +13,7 @@ lib/
 .idea/
 .happypack
 .DS_Store
+.vscode
 *.swp
 *.dia~
 .ice

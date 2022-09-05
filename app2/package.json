@@ -1,0 +1,87 @@
+{
+  "name": "ice-vitepack-project",
+  "version": "0.1.0",
+  "description": "Ant Design and icejs, use TypeScript.",
+  "scripts": {
+    "start": "cross-env MODE=vite icejs start --config config/build.config.js  --mode vite --port 6012",
+    "start:micro": "cross-env MODE=vite icejs start --config config/build.config.js  --mode webpack --port 6012",
+    "build": "cross-env MODE=webpack icejs build --config config/build.config.js  --mode webpack",
+    "server": "node server.js --port 6012",
+    "update-plugin": "cd config/plugin-config && yarn build && cd .. && yarn add -D ./config/plugin-config",
+    "lint-staged": "lint-staged",
+    "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx",
+    "lint": "npm run eslint && npm run stylelint",
+    "eslint": "eslint --cache --ext .js,.jsx ./",
+    "stylelint": "stylelint ./**/*.scss",
+    "ts-check-error": "tsc --version & tsc --noEmit"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^4.0.2",
+    "@ant-design/pro-layout": "^6.5.1",
+    "ahooks": "^3.1.3",
+    "antd": "^4.18.2",
+    "classnames": "^2.3.1",
+    "dva": "^2.4.1",
+    "dva-loading": "^3.0.22",
+    "echarts": "^5.2.2",
+    "http-proxy-middleware": "^2.0.1",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "monaco-editor": "^0.31.1",
+    "monaco-editor-webpack-plugin": "^7.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-intl": "^5.24.3",
+    "react-monaco-editor": "^0.46.0",
+    "react-redux": "^7.2.6",
+    "react-router": "^5.2.0",
+    "react-router-config": "^5.1.1",
+    "react-router-dom": "^5.2.0",
+    "redux-saga": "^1.1.3"
+  },
+  "devDependencies": {
+    "@iceworks/spec": "^1.0.1",
+    "@types/react": "^17.0.14",
+    "@types/react-dom": "^17.0.9",
+    "@types/react-redux": "^7.1.22",
+    "@types/react-router-dom": "^5.3.3",
+    "@umijs/fabric": "^2.10.0",
+    "build-plugin-antd": "^0.1.2",
+    "build-plugin-ignore-style": "^0.1.0",
+    "build-plugin-moment-locales": "^0.1.3",
+    "connect-history-api-fallback": "^1.6.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.30.0",
+    "express": "^4.17.2",
+    "husky": "^3.1.0",
+    "ice.js": "^2.0.0",
+    "lint-staged": "^9.5.0",
+    "plugin-config": "./config/plugin-config",
+    "stylelint": "^13.1.0",
+    "typescript": "^4.5.5",
+    "vite-plugin-monaco-editor": "^1.0.10"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint-staged && npm run ts-check-error"
+    }
+  },
+  "lint-staged": {
+    "**/*.less": [
+      "stylelint --fix --syntax less",
+      "git add"
+    ],
+    "**/*.{js,jsx,tsx,ts,less,json}": [
+      "prettier --write",
+      "git add"
+    ],
+    "**/*.{js,jsx}": "npm run lint-staged:js",
+    "**/*.{js,ts,tsx}": "npm run lint-staged:js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ice-lab/react-materials/tree/master/scaffolds/antd-lite"
+  },
+  "private": true,
+  "originTemplate": "@icedesign/ice-antd-scaffold"
+}

@@ -1,4 +1,4 @@
-import { registerMicroApps, start } from 'qiankun';
+import { registerMicroApps, start as qiankunStart } from 'qiankun';
 
 
 registerMicroApps([
@@ -16,4 +16,15 @@ registerMicroApps([
   },
 ]);
 // 启动 qiankun
-export default start;
+export default () => {
+  qiankunStart({
+    sandbox: true,
+    excludeAssetFilter: (url) => {
+      console.log(url)
+      if (url.includes('remoteEntry.js')) {
+        return true;
+      }
+      return false
+    }
+  })
+};

@@ -9,6 +9,7 @@ import MonacoEditor from 'react-monaco-editor';
 import moment from 'moment';
 import _ from 'lodash';
 import EchartExample from './components/echarts';
+console.log(React.version);
 
 function Dashboard(props) {
   const { count, dispatch } = props;

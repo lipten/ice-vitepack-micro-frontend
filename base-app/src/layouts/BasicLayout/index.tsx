@@ -3,6 +3,8 @@ import ProLayout, { DefaultFooter } from '@ant-design/pro-layout';
 import { Link } from 'ice';
 import { renderRoutes } from 'react-router-config';
 import { asideMenuConfig } from './menuConfig';
+import microStart from '../../microConfig';
+import { useMount } from 'ahooks';
 
 const loopMenuItem = (menus) =>
   menus.map(({ icon, children, ...item }) => ({
@@ -11,7 +13,12 @@ const loopMenuItem = (menus) =>
     children: children && loopMenuItem(children),
   }));
 
-export default function BasicLayout({ route, location }) {
+export default function BasicLayout(props) {
+  const { location } = props;
+  useMount(() => {
+    // 容器挂载后再启动微前端
+    microStart();
+  });
   return (
     <ProLayout
       title="icejs & antd"
@@ -34,4 +41,4 @@ export default function BasicLayout({ route, location }) {
       </div>
     </ProLayout>
   );
-}
+};
